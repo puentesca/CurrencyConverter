@@ -1,0 +1,129 @@
+.flex-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row;
+          flex-flow: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.flex-column {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+body {
+  background-color: #130C26;
+  font-family: 'Montserrat';
+}
+
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.title {
+  color: #3a2474;
+  font-size: 70px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-left: 40px;
+}
+
+.icon {
+  width: 40px;
+  margin: 40px;
+}
+
+.input-large, .currency-type {
+  padding: 0px;
+  font-family: 'Montserrat';
+  font-weight: bold;
+  font-size: 50px;
+  background-color: transparent;
+  border: none;
+  color: #E43078;
+  outline: none;
+}
+
+.input-large::-webkit-input-placeholder, .currency-type::-webkit-input-placeholder {
+  color: rgba(228, 48, 120, 0.5);
+}
+
+.input-large:-ms-input-placeholder, .currency-type:-ms-input-placeholder {
+  color: rgba(228, 48, 120, 0.5);
+}
+
+.input-large::-ms-input-placeholder, .currency-type::-ms-input-placeholder {
+  color: rgba(228, 48, 120, 0.5);
+}
+
+.input-large::placeholder, .currency-type::placeholder {
+  color: rgba(228, 48, 120, 0.5);
+}
+
+.input-large.left, .currency-type.left {
+  text-align: left;
+}
+
+.input-large.right, .currency-type.right {
+  text-align: right;
+}
+
+/* Disabled number input styling */
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.input-large {
+  width: 40vw;
+}
+
+.currency-type {
+  font-size: 40px;
+  width: 30px;
+  margin: 20px;
+  background-color: transparent;
+  border: none;
+}
+
+select {
+  color: #E43078;
+  background-color: #090613;
+  outline: none;
+  margin-top: 20px;
+  font-family: 'Montserrat';
+  font-weight: bold;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 4px;
+}
+
+select.left {
+  margin-left: auto;
+}
+
+select.right {
+  margin-right: auto;
+}
+/*# sourceMappingURL=style.css.map */
