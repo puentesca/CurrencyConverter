@@ -8,7 +8,7 @@ let convertedCurrencySelected = "AUD";
 //leftChanged is a boolean if true then left side changed
 let inputChanged = function(leftChanged) {
 	console.log("changed on left: " + leftChanged);
-	updateConversion(leftChanged);
+	updateConversion(leftChanged, false);
 	
 }
 
@@ -23,7 +23,7 @@ let currencyChanged = function(leftChanged) {
 		convertedCurrencySelected = $("#currency_select_2").val();
 		$("#currency_display_2").val(convertedCurrencySelected);
 	}
-	updateConversion(leftChanged);
+	updateConversion(leftChanged, true);
 }
 
 //Called after document has completed rendering
@@ -87,7 +87,7 @@ function initCurrencies()
 }
 
 //Called whenever the numbers typed are changed. Uses the base value as the one to stay the same.
-function updateConversion(baseIsLeft)
+function updateConversion(baseIsLeft, modifySameSide)
 {
 
 	let base = baseCurrencySelected;
@@ -101,6 +101,12 @@ function updateConversion(baseIsLeft)
 		converted = baseCurrencySelected;
 		inputIDToChange = "#input_1";
 		inputIDToConvert = "#input_2";
+	}
+
+	//If you change the currency, convert the currency on that side to the currency of the other side
+	if(modifySameSide)
+	{
+		inputIDToChange = inputIDToConvert;
 	}
 
 	//URL To convert from base to converted currency
