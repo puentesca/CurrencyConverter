@@ -101,7 +101,7 @@ input[type="number"] {
 
 .currency-type {
   font-size: 40px;
-  width: 30px;
+  width: 100px;
   margin: 20px;
   background-color: transparent;
   border: none;
