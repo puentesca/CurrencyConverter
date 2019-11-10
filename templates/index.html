@@ -10,6 +10,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet">
 	<link type="text/css" rel="stylesheet" href="static/style.css">
 	<link rel="shortcut icon" href="#" />
+	<script src="static/main-page.js"></script>
 </head>
 <body>
 	<div class='container flex-row centered'>
@@ -18,25 +19,23 @@
 				<input id="input_1" type='number' name='input_1' class='input-large right' placeholder='xxx.xx' autofocus="true">
 				<input id="currency_display_1" type="text" class='currency-type' value="$" disabled>
 			</div>
-			<select id="currency_1" name='currency_type_1' class='left'>
-				<option value="USD">US Dollar</option>
+			<select id="currency_select_1" name='currency_type_1' class='left'>
+				<!-- <option value="USD">US Dollar</option> -->
 			</select>
 		</div>
 		<div class='flex-column'>
 			<img src='static/icon.svg' class='icon'>
 		</div>
 		<div class='flex-column'>
-				<div class='flex-row'>
-					<input id="currency_display_2" type="text" class='currency-type' value="$" disabled>
-					<input id="input_2" type='number' name='input_2' class='input-large left' placeholder='xxx.xx'>
-				</div>
-				<select id="currency_2" name='currency_type_2' class='right'>
-						<option value="USD">US Dollar</option>
-					</select>
+			<div class='flex-row'>
+				<input id="currency_display_2" type="text" class='currency-type' value="$" disabled>
+				<input id="input_2" type='number' name='input_2' class='input-large left' placeholder='xxx.xx'>
+			</div>
+			<select id="currency_select_2" name='currency_type_2' class='right'>
+					<!-- <option value="USD">USD</option> -->
 			</select>
 		</div>
 	</div>
 	<!-- <script src='app.js'></script> -->
-	<script src="static/main-page.js"></script>
 </body>
 </html>
