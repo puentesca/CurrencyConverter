@@ -29,10 +29,7 @@ let currencyChanged = function(leftChanged) {
 //Called after document has completed rendering
 function init()
 {
-	//TODO:
-	//Add listener for currency selected change and have it update the variable above
-	//Add listener for number input changing to have it call the conversion and auto update based on the
-	//left selected currency and right selected currency
+	//sets functions to run on event
 	$("#input_1").on('input', function() {
 		inputChanged(true)
 	});
@@ -72,15 +69,18 @@ function initCurrencies()
 
 		//Alphabetizes the list
 		keys.sort();
+		//Adds all currencies available from the API to the list
 		for(var i = 0; i < keys.length; i++)
 		{
 			$('#currency_select_1').append('<option value="' + keys[i] + '"> ' + keys[i] + '</option>'); 
 			$('#currency_select_2').append('<option value="' + keys[i] + '"> ' + keys[i] + '</option>'); 
 		}
+		//Sets default value
 		$('#currency_select_1').val('AUD'); 
 		$('#currency_select_2').val('AUD'); 
 	});
 
+	//Sets default value
 	$("#currency_display_1").val("AUD");
 	$("#currency_display_2").val("AUD");
 
@@ -106,7 +106,11 @@ function updateConversion(baseIsLeft, modifySameSide)
 	//If you change the currency, convert the currency on that side to the currency of the other side
 	if(modifySameSide)
 	{
+		let holder = inputIDToChange;
 		inputIDToChange = inputIDToConvert;
+		inputIDToConvert = holder;
+		base = convertedCurrencySelected;
+		converted = baseCurrencySelected;
 	}
 
 	//URL To convert from base to converted currency
@@ -118,6 +122,12 @@ function updateConversion(baseIsLeft, modifySameSide)
 		url
 	}).done(function(result){
 		let conversionRate = result["rates"][converted];
+		console.log("------------------------------------");
+		console.log("Conversion rate: " + conversionRate);
+		console.log("Val to convert: " + valToConvert);
+		console.log("Result: " + (conversionRate * valToConvert));
+		console.log("Converting " + base + " to " + converted );
+		console.log("------------------------------------");
 		$(inputIDToChange).val( (valToConvert * conversionRate).toFixed(2));
 	});
 }
