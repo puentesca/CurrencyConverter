@@ -5,13 +5,23 @@ let baseCurrencySelected = "AUD";
 //(Right)
 let convertedCurrencySelected = "AUD";
 
+let debugging = false; //Determines whether or not to print debugging info
+
 //leftChanged is a boolean if true then left side changed
 let inputChanged = function(leftChanged) {
-	console.log("changed on left: " + leftChanged);
-	updateConversion(leftChanged, false);
+	if(debugging)
+		console.log("changed on left: " + leftChanged);
+	updateConversion(leftChanged);
 	
 }
 
+//Enable or disable debugging
+function debug(enabled)
+{
+	debugging = enabled;
+}
+
+//Called when one sides currency is changed
 let currencyChanged = function(leftChanged) {
 	if(leftChanged)
 	{
@@ -23,7 +33,7 @@ let currencyChanged = function(leftChanged) {
 		convertedCurrencySelected = $("#currency_select_2").val();
 		$("#currency_display_2").val(convertedCurrencySelected);
 	}
-	updateConversion(leftChanged, true);
+	updateConversion(!leftChanged);
 }
 
 //Called after document has completed rendering
@@ -80,55 +90,53 @@ function initCurrencies()
 		$('#currency_select_2').val('AUD'); 
 	});
 
-	//Sets default value
+	//Sets default display value
 	$("#currency_display_1").val("AUD");
 	$("#currency_display_2").val("AUD");
 
 }
 
-//Called whenever the numbers typed are changed. Uses the base value as the one to stay the same.
-function updateConversion(baseIsLeft, modifySameSide)
+//Called whenever the conversions need to be updated. 
+// baseIsLeft = true when the base currency to convert from is in the left position.
+function updateConversion(baseIsLeft)
 {
-
-	let base = baseCurrencySelected;
-	let converted = convertedCurrencySelected;
-	let inputIDToChange = "#input_2"; //The ID of the input box to display the conversion
-	let inputIDToConvert = "#input_1"; //The ID of the input box that the number to convert is pulled from
-	//If the base currency is the right side
+	//Assumes left side is the base
+	let localBase = baseCurrencySelected;
+	let localConverted = convertedCurrencySelected;
+	let inputIDToConvert = "#input_1";
+	let inputIDToChange = "#input_2";
+	//If the right side is the base
 	if(!baseIsLeft)
 	{
-		base = convertedCurrencySelected;
-		converted = baseCurrencySelected;
-		inputIDToChange = "#input_1";
 		inputIDToConvert = "#input_2";
+		inputIDToChange = "#input_1";
+		localBase = convertedCurrencySelected;
+		localConverted = baseCurrencySelected;
 	}
-
-	//If you change the currency, convert the currency on that side to the currency of the other side
-	if(modifySameSide)
-	{
-		let holder = inputIDToChange;
-		inputIDToChange = inputIDToConvert;
-		inputIDToConvert = holder;
-		base = convertedCurrencySelected;
-		converted = baseCurrencySelected;
-	}
-
 	//URL To convert from base to converted currency
-	let url = "https://api.exchangeratesapi.io/latest?base=" + base + "&symbols=" + converted;
+	let url = "https://api.exchangeratesapi.io/latest?base=" + localBase + "&symbols=" + localConverted;
 
+	//Gets the value to convert
 	let valToConvert = parseFloat($(inputIDToConvert).val());
+
 
 	$.ajax({
 		url
 	}).done(function(result){
-		let conversionRate = result["rates"][converted];
-		console.log("------------------------------------");
-		console.log("Conversion rate: " + conversionRate);
-		console.log("Val to convert: " + valToConvert);
-		console.log("Result: " + (conversionRate * valToConvert));
-		console.log("Converting " + base + " to " + converted );
-		console.log("------------------------------------");
-		$(inputIDToChange).val( (valToConvert * conversionRate).toFixed(2));
+		 let conversionRate = result["rates"][localConverted];
+		 if(debugging)
+		 {
+			console.log("------------------------------------");
+			console.log("Main base: " + baseCurrencySelected);
+			console.log("Main converted: " + convertedCurrencySelected);
+			console.log("Base is left: " + baseIsLeft);
+			console.log("Conversion rate: " + conversionRate);
+			console.log("Val to convert: " + valToConvert);
+			console.log("Result: " + (conversionRate * valToConvert));
+			console.log("Converting " + localBase + " to " + localConverted );
+			console.log("------------------------------------");
+		 }
+		 $(inputIDToChange).val( (valToConvert * conversionRate).toFixed(2));
 	});
 }
 

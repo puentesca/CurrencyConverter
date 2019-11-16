@@ -15,27 +15,28 @@
 <body>
 	<div class='container flex-row centered'>
 		<div class='flex-column'>
+			<!-- Holds left side input and currency display -->
 			<div class='flex-row'>
 				<input id="input_1" type='number' name='input_1' class='input-large right' placeholder='xxx.xx' autofocus="true">
 				<input id="currency_display_1" type="text" class='currency-type' value="$" disabled>
 			</div>
+			<!-- Left side currency selection box -->
 			<select id="currency_select_1" name='currency_type_1' class='left'>
-				<!-- <option value="USD">US Dollar</option> -->
 			</select>
 		</div>
 		<div class='flex-column'>
 			<img src='static/icon.svg' class='icon'>
 		</div>
 		<div class='flex-column'>
+			<!-- Holds right side input and currency display -->
 			<div class='flex-row'>
 				<input id="currency_display_2" type="text" class='currency-type' value="$" disabled>
 				<input id="input_2" type='number' name='input_2' class='input-large left' placeholder='xxx.xx'>
 			</div>
+			<!-- Right side currency selection box -->
 			<select id="currency_select_2" name='currency_type_2' class='right'>
-					<!-- <option value="USD">USD</option> -->
 			</select>
 		</div>
 	</div>
-	<!-- <script src='app.js'></script> -->
 </body>
 </html>
